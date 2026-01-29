@@ -5,8 +5,17 @@ import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
 
+interface Plan {
+  name: string;
+  price: string;
+  period?: string;
+  features: string[];
+  category?: string;
+  isPopular?: boolean;
+}
+
 // Default data as fallback
-const defaultPricingData = {
+const defaultPricingData: Record<string, Plan[]> = {
   SD: [
     { name: 'Basic', price: 'Rp 300.000', period: '/bulan', features: ['2x Seminggu', 'Matematika & IPA', 'Modul Digital', 'Max 10 Siswa'] },
     { name: 'Pro', price: 'Rp 500.000', period: '/bulan', features: ['3x Seminggu', 'Semua Mata Pelajaran', 'Modul Cetak', 'Max 8 Siswa', 'Konsultasi PR'] },
@@ -23,15 +32,6 @@ const defaultPricingData = {
     { name: 'Elite', price: 'Rp 1.200.000', period: '/bulan', features: ['4x Seminggu', 'Saintek/Soshum', 'Modul Premium', 'Max 5 Siswa', 'Private Session', 'Tryout UTBK Rutin'] },
   ],
 };
-
-interface Plan {
-  name: string;
-  price: string;
-  period?: string;
-  features: string[];
-  category?: string;
-  isPopular?: boolean;
-}
 
 interface PricingProps {
   initialJenjang?: string;

@@ -20,7 +20,7 @@ interface FacilityItem {
 interface FacilityProps {
   data?: {
     facilities?: FacilityItem[];
-  };
+  } | null;
 }
 
 export const Facility = ({ data }: FacilityProps) => {

@@ -41,7 +41,7 @@ export const GET_PRICING_QUERY = gql`
 
 export const GET_POSTS_QUERY = gql`
   query GetPosts {
-    blogPosts(orderBy: publishedDate_DESC) {
+    blogPosts(first: 100, orderBy: publishedDate_DESC) {
       id
       title
       slug
@@ -105,29 +105,31 @@ export const GET_POST_BY_SLUG_QUERY = gql`
 
 export const GET_POSTS_BY_CATEGORY_QUERY = gql`
   query GetPostsByCategory($category: String!) {
-    blogPosts(where: { category: { slug: $category } }, orderBy: publishedDate_DESC) {
-      id
-      title
-      slug
-      excerpt
-      coverImage {
-        url
-      }
-      bannerImage {
-        url
-      }
-      thumbnail {
-        url
-      }
-      category {
-        name
+    category(where: { slug: $category }) {
+      blogPosts(orderBy: publishedDate_DESC) {
+        id
+        title
         slug
-      }
-      publishedDate
-      author {
-        name
-        photo {
+        excerpt
+        coverImage {
           url
+        }
+        bannerImage {
+          url
+        }
+        thumbnail {
+          url
+        }
+        category {
+          name
+          slug
+        }
+        publishedDate
+        author {
+          name
+          photo {
+            url
+          }
         }
       }
     }

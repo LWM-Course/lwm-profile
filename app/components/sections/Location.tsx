@@ -9,7 +9,7 @@ interface LocationProps {
     phone?: string;
     email?: string;
     googleMapsEmbedUrl?: string;
-  };
+  } | null;
 }
 
 export const Location = ({ data }: LocationProps) => {

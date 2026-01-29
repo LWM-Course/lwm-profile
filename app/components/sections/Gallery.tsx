@@ -23,7 +23,7 @@ const defaultGalleryItems: GalleryItem[] = [
 interface GalleryProps {
   data?: {
     galleryImages?: GalleryItem[];
-  };
+  } | null;
 }
 
 export const Gallery = ({ data }: GalleryProps) => {

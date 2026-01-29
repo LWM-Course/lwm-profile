@@ -16,7 +16,7 @@ interface HeroProps {
     image?: {
       url: string;
     };
-  };
+  } | null;
 }
 
 export const Hero = ({ data }: HeroProps) => {

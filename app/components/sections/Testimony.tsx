@@ -15,7 +15,7 @@ export interface TestimonialItem {
 interface TestimonyProps {
   data?: {
     testimonials?: TestimonialItem[];
-  };
+  } | null;
 }
 
 const defaultTestimonials: TestimonialItem[] = [

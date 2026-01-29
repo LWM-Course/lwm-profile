@@ -35,8 +35,11 @@ export async function getPostBySlug(slug: string) {
 }
 
 export async function getPostsByCategory(category: string) {
-  const { GET_POSTS_BY_CATEGORY_QUERY } = await import('./queries');
-  return hygraph.request(GET_POSTS_BY_CATEGORY_QUERY, { category });
+  const { GET_POSTS_QUERY } = await import('./queries');
+  const data: any = await hygraph.request(GET_POSTS_QUERY);
+  const allPosts = data.blogPosts || [];
+  const filteredPosts = allPosts.filter((post: any) => post.category?.slug === category);
+  return { blogPosts: filteredPosts };
 }
 
 export async function getTestimonials() {

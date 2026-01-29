@@ -42,7 +42,7 @@ export const Button: React.FC<ButtonProps> = ({
     lg: 'px-8 py-3.5 text-lg',
   };
 
-  const width = props.fullWidth ? 'w-full' : '';
+  const width = fullWidth ? 'w-full' : '';
   const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${width} ${className}`;
 
   if (props.href) {

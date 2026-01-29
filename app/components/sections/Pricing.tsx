@@ -36,7 +36,7 @@ const defaultPricingData: Record<string, Plan[]> = {
 interface PricingProps {
   initialJenjang?: string;
   hideTabs?: boolean;
-  plans?: Plan[];
+  plans?: Plan[] | null;
 }
 
 export const Pricing: React.FC<PricingProps> = ({ initialJenjang = 'SD', hideTabs = false, plans }) => {

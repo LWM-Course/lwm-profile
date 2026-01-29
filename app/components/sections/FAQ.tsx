@@ -11,7 +11,7 @@ export interface FAQItem {
 interface FAQProps {
   data?: {
     faqs?: FAQItem[];
-  };
+  } | null;
 }
 
 const defaultFaqData: FAQItem[] = [

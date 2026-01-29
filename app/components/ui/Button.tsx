@@ -1,10 +1,23 @@
 import React from 'react';
+import Link from 'next/link';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface BaseButtonProps {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
+  children: React.ReactNode;
+  className?: string;
 }
+
+type ButtonAsButton = BaseButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  href?: undefined;
+};
+
+type ButtonAsLink = BaseButtonProps & React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href: string;
+};
+
+export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 export const Button: React.FC<ButtonProps> = ({
   children,
@@ -29,12 +42,32 @@ export const Button: React.FC<ButtonProps> = ({
     lg: 'px-8 py-3.5 text-lg',
   };
 
-  const width = fullWidth ? 'w-full' : '';
+  const width = props.fullWidth ? 'w-full' : '';
+  const combinedClassName = `${baseStyles} ${variants[variant]} ${sizes[size]} ${width} ${className}`;
+
+  if (props.href) {
+    const { href, ...linkProps } = props as ButtonAsLink;
+    const isExternal = href.startsWith('http') || href.startsWith('mailto:');
+    
+    if (isExternal) {
+      return (
+        <a href={href} className={combinedClassName} {...linkProps}>
+          {children}
+        </a>
+      );
+    }
+    
+    return (
+      <Link href={href} className={combinedClassName} {...(linkProps as any)}>
+        {children}
+      </Link>
+    );
+  }
 
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${width} ${className}`}
-      {...props}
+      className={combinedClassName}
+      {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
     >
       {children}
     </button>

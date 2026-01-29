@@ -30,7 +30,6 @@ export default function AdminPage() {
         </div>
 
         <Button 
-          as="a" 
           href="https://app.hygraph.com/" 
           target="_blank" 
           rel="noopener noreferrer"

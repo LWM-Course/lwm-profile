@@ -20,7 +20,7 @@ export const ParentsOffer = () => {
                    Jangan biarkan potensi anak terpendam. Bergabunglah dengan ribuan orang tua lainnya yang telah mempercayakan pendidikan anak mereka kepada LWM. Dapatkan sesi konsultasi gratis sekarang!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                   <Button className="bg-white text-orange-600 hover:bg-gray-100 px-8 py-3 rounded-full font-bold shadow-md transition-transform hover:scale-105">
+                   <Button variant="ghost" className="bg-white text-orange-600 hover:text-orange-700 hover:bg-gray-100 px-8 py-3 rounded-full font-bold shadow-md transition-transform hover:scale-105 focus:ring-orange-300 focus:ring-offset-white">
                       Daftar Sekarang
                    </Button>
                    <Button className="bg-transparent border-2 border-white text-white hover:bg-white/10 px-8 py-3 rounded-full font-bold transition-colors">

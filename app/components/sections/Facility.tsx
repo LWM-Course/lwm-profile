@@ -2,16 +2,30 @@ import React from 'react';
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 
-const facilities = [
-  { icon: 'wifi', title: 'Free Wi-Fi', desc: 'Koneksi internet super cepat di seluruh area.' },
-  { icon: 'ac', title: 'Ruang Ber-AC', desc: 'Ruang kelas nyaman dengan pendingin ruangan.' },
-  { icon: 'book', title: 'Modul Lengkap', desc: 'Bahan ajar kurikulum terbaru dan komprehensif.' },
-  { icon: 'users', title: 'Diskusi Kelompok', desc: 'Area khusus untuk belajar kelompok dan diskusi.' },
-  { icon: 'video', title: 'Kelas Online', desc: 'Fasilitas hybrid learning untuk fleksibilitas.' },
-  { icon: 'coffee', title: 'Snack & Minum', desc: 'Disediakan snack dan air mineral gratis.' },
+const defaultFacilities = [
+  { icon: 'wifi', title: 'Free Wi-Fi', description: 'Koneksi internet super cepat di seluruh area.' },
+  { icon: 'ac', title: 'Ruang Ber-AC', description: 'Ruang kelas nyaman dengan pendingin ruangan.' },
+  { icon: 'book', title: 'Modul Lengkap', description: 'Bahan ajar kurikulum terbaru dan komprehensif.' },
+  { icon: 'users', title: 'Diskusi Kelompok', description: 'Area khusus untuk belajar kelompok dan diskusi.' },
+  { icon: 'video', title: 'Kelas Online', description: 'Fasilitas hybrid learning untuk fleksibilitas.' },
+  { icon: 'coffee', title: 'Snack & Minum', description: 'Disediakan snack dan air mineral gratis.' },
 ];
 
-export const Facility = () => {
+interface FacilityItem {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+interface FacilityProps {
+  data?: {
+    facilities?: FacilityItem[];
+  };
+}
+
+export const Facility = ({ data }: FacilityProps) => {
+  const facilities = data?.facilities && data.facilities.length > 0 ? data.facilities : defaultFacilities;
+
   return (
     <Section background="yellow">
       <div className="text-center max-w-3xl mx-auto mb-16">
@@ -30,10 +44,12 @@ export const Facility = () => {
                {item.icon === 'users' && '👥'}
                {item.icon === 'video' && '💻'}
                {item.icon === 'coffee' && '☕'}
+               {/* Fallback for unknown icons or custom ones */}
+               {!['wifi', 'ac', 'book', 'users', 'video', 'coffee'].includes(item.icon) && '✨'}
             </div>
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-              <p className="text-gray-600 text-sm">{item.desc}</p>
+              <p className="text-gray-600 text-sm">{item.description}</p>
             </div>
           </Card>
         ))}

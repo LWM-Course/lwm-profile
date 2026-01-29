@@ -2,7 +2,23 @@ import React from 'react';
 import { Section } from '../ui/Section';
 import { Card } from '../ui/Card';
 
-export const Location = () => {
+interface LocationProps {
+  data?: {
+    name?: string;
+    address?: string;
+    phone?: string;
+    email?: string;
+    googleMapsEmbedUrl?: string;
+  };
+}
+
+export const Location = ({ data }: LocationProps) => {
+  const name = data?.name || "Alamat Pusat";
+  const address = data?.address || "Jl. Pendidikan No. 123, Jakarta Selatan, DKI Jakarta";
+  const phone = data?.phone || "+62 812 3456 7890";
+  const email = data?.email || "info@lwm.com";
+  const googleMapsEmbedUrl = data?.googleMapsEmbedUrl || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.052605809071!2d106.82397131536968!3d-6.256801995471168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1088c306603%3A0x628043644913610!2sJakarta!5e0!3m2!1sen!2sid!4v1629858385310!5m2!1sen!2sid";
+
   return (
     <Section id="location" background="orange">
       <div className="text-center max-w-3xl mx-auto mb-12">
@@ -14,7 +30,7 @@ export const Location = () => {
         {/* Map Iframe */}
         <div className="lg:col-span-2 h-96 rounded-2xl overflow-hidden shadow-lg border-4 border-white">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.052605809071!2d106.82397131536968!3d-6.256801995471168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1088c306603%3A0x628043644913610!2sJakarta!5e0!3m2!1sen!2sid!4v1629858385310!5m2!1sen!2sid" 
+            src={googleMapsEmbedUrl} 
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 
@@ -37,7 +53,7 @@ export const Location = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">Email</p>
-                      <a href="mailto:info@lwm.com" className="text-brand-orange hover:underline">info@lwm.com</a>
+                      <a href={`mailto:${email}`} className="text-brand-orange hover:underline">{email}</a>
                     </div>
                   </div>
 
@@ -47,7 +63,7 @@ export const Location = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-gray-900">Telepon / WhatsApp</p>
-                      <a href="tel:+6281234567890" className="text-brand-orange hover:underline">+62 812 3456 7890</a>
+                      <a href={`tel:${phone.replace(/\s+/g, '')}`} className="text-brand-orange hover:underline">{phone}</a>
                     </div>
                   </div>
 
@@ -56,8 +72,8 @@ export const Location = () => {
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                     </div>
                     <div>
-                      <p className="font-semibold text-gray-900">Alamat Pusat</p>
-                      <p className="text-gray-600">Jl. Pendidikan No. 123, Jakarta Selatan, DKI Jakarta</p>
+                      <p className="font-semibold text-gray-900">{name}</p>
+                      <p className="text-gray-600">{address}</p>
                     </div>
                   </div>
                 </div>

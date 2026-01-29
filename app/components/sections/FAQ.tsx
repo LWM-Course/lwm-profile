@@ -3,7 +3,18 @@
 import React, { useState } from 'react';
 import { Section } from '../ui/Section';
 
-const faqData = [
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface FAQProps {
+  data?: {
+    faqs?: FAQItem[];
+  };
+}
+
+const defaultFaqData: FAQItem[] = [
   { question: 'Apakah ada kelas percobaan gratis?', answer: 'Ya, kami menyediakan kelas percobaan gratis (Free Trial) untuk semua jenjang. Silakan klik tombol "Coba Kelas Gratis" untuk mendaftar.' },
   { question: 'Berapa jumlah maksimal siswa dalam satu kelas?', answer: 'Untuk menjaga kualitas pembelajaran, kami membatasi maksimal 10 siswa untuk kelas reguler dan 5 siswa untuk kelas intensif.' },
   { question: 'Apakah jadwal belajar bisa disesuaikan?', answer: 'Tentu! Kami memiliki beberapa pilihan jadwal (pagi, siang, sore) yang bisa Anda pilih sesuai ketersediaan waktu siswa.' },
@@ -11,8 +22,9 @@ const faqData = [
   { question: 'Apakah ada garansi kenaikan nilai?', answer: 'Kami berkomitmen memberikan bimbingan terbaik. Jika siswa mengikuti seluruh program dengan baik namun nilai tidak memuaskan, kami menyediakan sesi konsultasi dan bimbingan tambahan gratis.' },
 ];
 
-export const FAQ = () => {
+export const FAQ = ({ data }: FAQProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const faqs = data?.faqs && data.faqs.length > 0 ? data.faqs : defaultFaqData;
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -26,7 +38,7 @@ export const FAQ = () => {
       </div>
 
       <div className="max-w-3xl mx-auto space-y-4">
-        {faqData.map((item, index) => (
+        {faqs.map((item, index) => (
           <div key={index} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
             <button
               onClick={() => toggleFAQ(index)}

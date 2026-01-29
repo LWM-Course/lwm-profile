@@ -4,16 +4,18 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export const BlogNavbar = () => {
+export interface Category {
+  name: string;
+  slug: string;
+}
+
+interface BlogNavbarProps {
+  categories?: Category[];
+}
+
+export const BlogNavbar = ({ categories = [] }: BlogNavbarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-
-  const categories = [
-    { name: 'Tips Belajar', href: '/blog/tips-belajar' },
-    { name: 'Info PTN', href: '/blog/info-ptn' },
-    { name: 'Parenting', href: '/blog/parenting' },
-    { name: 'Event LWM', href: '/blog/event' },
-  ];
 
   return (
     <nav className="fixed w-full z-50 bg-white shadow-sm border-b border-gray-100">
@@ -40,10 +42,10 @@ export const BlogNavbar = () => {
               </Link>
               {categories.map((cat) => (
                 <Link
-                  key={cat.name}
-                  href={cat.href}
+                  key={cat.slug}
+                  href={`/blog/${cat.slug}`}
                   className={`text-sm font-medium transition-colors ${
-                    pathname === cat.href ? 'text-brand-orange' : 'text-gray-600 hover:text-brand-orange'
+                    pathname === `/blog/${cat.slug}` ? 'text-brand-orange' : 'text-gray-600 hover:text-brand-orange'
                   }`}
                 >
                   {cat.name}
@@ -98,9 +100,9 @@ export const BlogNavbar = () => {
             </Link>
             {categories.map((cat) => (
               <Link
-                key={cat.name}
-                href={cat.href}
-                className={`block text-sm font-medium ${pathname === cat.href ? 'text-brand-orange' : 'text-gray-600'}`}
+                key={cat.slug}
+                href={`/blog/${cat.slug}`}
+                className={`block text-sm font-medium ${pathname === `/blog/${cat.slug}` ? 'text-brand-orange' : 'text-gray-600'}`}
                 onClick={() => setIsOpen(false)}
               >
                 {cat.name}

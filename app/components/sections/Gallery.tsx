@@ -1,8 +1,9 @@
 'use client';
+import Image from 'next/image';
 import React, { useRef, useState, useEffect } from 'react';
 import { Section } from '../ui/Section';
 
-const galleryItems = [
+const defaultGalleryItems = [
   { title: 'Ruang Kelas Nyaman', color: 'bg-red-200' },
   { title: 'Laboratorium Komputer', color: 'bg-blue-200' },
   { title: 'Perpustakaan Lengkap', color: 'bg-green-200' },
@@ -11,9 +12,25 @@ const galleryItems = [
   { title: 'Kantin Sehat', color: 'bg-pink-200' },
 ];
 
-export const Gallery = () => {
+interface GalleryItem {
+  title: string;
+  image?: {
+    url: string;
+  };
+  color?: string;
+}
+
+interface GalleryProps {
+  data?: {
+    galleryImages?: GalleryItem[];
+  };
+}
+
+export const Gallery = ({ data }: GalleryProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+
+  const galleryItems = data?.galleryImages && data.galleryImages.length > 0 ? data.galleryImages : defaultGalleryItems;
 
   // Triple the items for smoother infinite scrolling buffer
   const displayItems = [...galleryItems, ...galleryItems, ...galleryItems];
@@ -68,12 +85,24 @@ export const Gallery = () => {
           {displayItems.map((item, index) => (
             <div 
               key={index} 
-              className="flex-shrink-0 w-80 h-60 rounded-2xl overflow-hidden shadow-md relative group/item hover:scale-105 transition-transform duration-300 select-none"
+              className="flex-shrink-0 w-80 h-60 rounded-2xl overflow-hidden shadow-md relative group/item hover:scale-105 transition-transform duration-300 select-none bg-gray-100"
             >
-              <div className={`w-full h-full ${item.color} flex items-center justify-center text-gray-500 font-medium`}>
-                {/* Placeholder Image */}
-                Image: {item.title}
-              </div>
+              {item.image?.url ? (
+                <div className="relative w-full h-full">
+                  <Image
+                    src={item.image.url}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                </div>
+              ) : (
+                <div className={`w-full h-full ${item.color || 'bg-gray-200'} flex items-center justify-center text-gray-500 font-medium`}>
+                   {/* Placeholder Image */}
+                   Image: {item.title}
+                </div>
+              )}
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 translate-y-full group-hover/item:translate-y-0 transition-transform">
                 <p className="text-white font-bold">{item.title}</p>
               </div>

@@ -1,14 +1,23 @@
 import React from 'react';
 import { BlogNavbar } from '../components/layout/BlogNavbar';
+import { getCategories } from '../lib/hygraph';
 
-export default function BlogLayout({
+export default async function BlogLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  let categories = [];
+  try {
+    const data = await getCategories();
+    categories = (data as any).categories || [];
+  } catch (error) {
+    console.error('Failed to fetch categories:', error);
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
-      <BlogNavbar />
+      <BlogNavbar categories={categories} />
       <main className="pt-16">
         {children}
       </main>

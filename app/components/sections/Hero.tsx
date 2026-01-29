@@ -51,10 +51,10 @@ export const Hero = ({ data }: HeroProps) => {
             {description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button as="a" href={ctaPrimaryLink} size="lg" className="shadow-xl shadow-brand-orange/20 hover:shadow-brand-orange/40 transform hover:-translate-y-1 transition-all">
+            <Button href={ctaPrimaryLink} size="lg" className="shadow-xl shadow-brand-orange/20 hover:shadow-brand-orange/40 transform hover:-translate-y-1 transition-all">
               {ctaPrimaryText}
             </Button>
-            <Button as="a" href={ctaSecondaryLink} variant="outline" size="lg">
+            <Button href={ctaSecondaryLink} variant="outline" size="lg">
               {ctaSecondaryText}
             </Button>
           </div>

@@ -3,15 +3,6 @@ import Image from 'next/image';
 import React, { useRef, useState, useEffect } from 'react';
 import { Section } from '../ui/Section';
 
-const defaultGalleryItems = [
-  { title: 'Ruang Kelas Nyaman', color: 'bg-red-200' },
-  { title: 'Laboratorium Komputer', color: 'bg-blue-200' },
-  { title: 'Perpustakaan Lengkap', color: 'bg-green-200' },
-  { title: 'Area Diskusi', color: 'bg-yellow-200' },
-  { title: 'Ruang Santai', color: 'bg-purple-200' },
-  { title: 'Kantin Sehat', color: 'bg-pink-200' },
-];
-
 interface GalleryItem {
   title: string;
   image?: {
@@ -19,6 +10,15 @@ interface GalleryItem {
   };
   color?: string;
 }
+
+const defaultGalleryItems: GalleryItem[] = [
+  { title: 'Ruang Kelas Nyaman', color: 'bg-red-200' },
+  { title: 'Laboratorium Komputer', color: 'bg-blue-200' },
+  { title: 'Perpustakaan Lengkap', color: 'bg-green-200' },
+  { title: 'Area Diskusi', color: 'bg-yellow-200' },
+  { title: 'Ruang Santai', color: 'bg-purple-200' },
+  { title: 'Kantin Sehat', color: 'bg-pink-200' },
+];
 
 interface GalleryProps {
   data?: {
